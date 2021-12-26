@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --color-white-1: #fefefe;
+    --color-dark-1: #242424;
+    --color-1: #9088ffcc;
+    --color-2: #ef7d4d;
+    --color-background: #6a4394;
+}
+
+html, body, main {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: var(--color-background);
+    color: var(--color-dark-1);
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-link {
+    background: var(--color-dark-1);
+    padding: 0.5em 1em;
+    height: 250px;
+}
+
+.card-link.purple {
+    background: var(--color-1);
+}
+
+.card-link.orange {
+    background: var(--color-2);
+}
+
+.card-link-a {
+    color: var(--color-white-1);
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.card-link-a:hover {
+    color: var(--color-white-1);
+}
