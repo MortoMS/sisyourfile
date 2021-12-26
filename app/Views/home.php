@@ -24,3 +24,29 @@
         </div>
     </div>
 </section>
+
+<style>
+.card-link {
+    background: var(--color-dark-1);
+    padding: 0.5em 1em;
+    height: 250px;
+}
+
+.card-link.purple {
+    background: var(--color-1);
+}
+
+.card-link.orange {
+    background: var(--color-2);
+}
+
+.card-link-a {
+    color: var(--color-white-1);
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.card-link-a:hover {
+    color: var(--color-white-1);
+}
+</style>

@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Util;
 use Config\Services;
 
 class CustomerLogin extends \App\Controllers\BaseController
@@ -19,10 +20,15 @@ class CustomerLogin extends \App\Controllers\BaseController
 
     public function index()
     {
-        $data['linkForgotPassword'] = base_url('CustomerLogin/forgotPassword');
-        $data["messageInfo"] = $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo");
-        $data["message"] = $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message");
-        return view('customer-login', $data);
+        $data = [
+            "title"              => lang('Login.customerTitle'),
+            "urlLogin"           => base_url('UserLogin/login'),
+            "linkForgotPassword" => base_url('CustomerLogin/forgotPassword'),
+            "message"            => $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message"),
+            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo")
+        ];
+
+        return Util::renderView("login", $data["title"], $data);
     }
 
     public function login()

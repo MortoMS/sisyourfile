@@ -14,7 +14,7 @@
      <div class="container">
          <a class="button user" href="<?=base_url('admin/user')?>">
              <div class="title"><?=lang('Home.titleButtonUser')?></div>
-             <img src="<?=base_url('/icons/undraw_add_user_ipe3.svg')?>"/>
+             <img src="<?= base_url('/icons/undraw_add_user_ipe3.svg') ?>"/>
          </a>
          <a class="button customer" href="<?=base_url('admin/customer')?>">
              <div class="title"><?=lang('Home.titleButtonCustumer')?></div>

@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'defaultTextUser' => 'Você é usuário?',
+    'defaultTextUser' => 'Você é Usuário?',
     'defaultTextCustomer' => 'Você é Cliente?',
     'defaultClickHere' => 'clique aqui!',
     'defaultForgotPassword' => 'Esqueceu a Senha?',
-    'userTitle' => 'Acesso do usuário',
+    'userTitle' => 'Acesso do Usuário',
     'customerTitle' => 'Acesso do Cliente',
     'messageEmailNotFound' => 'E-mail não encontrado!',
     'messagePasswordErro' => ' Senha não confere!',

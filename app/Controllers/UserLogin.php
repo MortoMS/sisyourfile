@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Util;
 use Config\Services;
 
 class UserLogin extends \App\Controllers\BaseController
@@ -19,10 +20,15 @@ class UserLogin extends \App\Controllers\BaseController
 
     public function index()
     {
-        $data['linkForgotPassword'] = base_url('UserLogin/forgotPassword');
-        $data["message"] = $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message");
-        $data["messageInfo"] = $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo");
-        return view('user-login', $data);
+        $data = [
+            "title"              => lang('Login.userTitle'),
+            "urlLogin"           => base_url('UserLogin/login'),
+            "linkForgotPassword" => base_url('UserLogin/forgotPassword'),
+            "message"            => $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message"),
+            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo")
+        ];
+
+        return Util::renderView("login", $data["title"], $data);
     }
 
     public function login()
