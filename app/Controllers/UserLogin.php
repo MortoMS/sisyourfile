@@ -1,21 +1,20 @@
 <?php
 
-
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Libraries\Util;
 use Config\Services;
 
-class UserLogin extends \App\Controllers\BaseController
+class UserLogin extends BaseController
 {
-
-    private $UserModel;
     private $session;
+    private $userModel;
 
     public function __construct()
     {
-        $this->session = Services::session();
-        $this->UserModel = new \App\Models\UserModel();
+        $this->session   = Services::session();
+        $this->userModel = new \App\Models\UserModel();
     }
 
     public function index()
@@ -24,8 +23,10 @@ class UserLogin extends \App\Controllers\BaseController
             "title"              => lang('Login.userTitle'),
             "urlLogin"           => base_url('UserLogin/login'),
             "linkForgotPassword" => base_url('UserLogin/forgotPassword'),
-            "message"            => $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message"),
-            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo")
+            "message"            => $this->session->getFlashdata("message") ?? 
+                                    $this->session->getFlashdata("message"),
+            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? 
+                                    $this->session->getFlashdata("messageInfo")
         ];
 
         return Util::renderView("login", $data["title"], $data);
@@ -33,35 +34,42 @@ class UserLogin extends \App\Controllers\BaseController
 
     public function login()
     {
-        try {
+        try
+        {
+            $user = $this->userModel->where(
+                'email', 
+                $this->request->getPost('email')
+            )->first();
 
-            $user = $this->UserModel->where('email', $this->request->getPost('email'))->first();
-            if (!$user) {
-                throw new \Exception(lang('Login.messageEmailNotFound'));
-            }
-            if (!password_verify($this->request->getPost('password'), $user->password)) {
-                throw new \Exception(lang('Login.messagePasswordErro'));
-            }
-            $this->session->set('user', $user);
-            return redirect()->to('/admin/home');
+            if (
+                $user and
+                password_verify($this->request->getPost('password'), $user->password)
+            )
+            {
+                $this->session->set('user', $user);
 
-        } catch (\Exception $ex) {
-            return redirect()->with('message', $ex->getMessage())->withInput()->to('/UserLogin');
+                return redirect()->to(base_url("/admin/home"));
+            }
+
+            throw new \Exception(lang('Login.messageUserNotFound'));
         }
-
-
-    }
-
-    public function logout()
-    {
-        $this->session->destroy();
-        return redirect()->to('/UserLogin');
+        catch (\Exception $ex)
+        {
+            return redirect()->with(
+                'message', 
+                $ex->getMessage()
+            )->withInput()->to(base_url('/UserLogin'));
+        }
     }
 
     public function forgotPassword()
     {
-        $data['urlForgotPasswordAction'] = base_url('UserLogin/sendEmailForgotPassword');
-        $data["erros"] = $this->session->getFlashdata("erros") ?? $this->session->getFlashdata("erros");
+        $data = [
+            "erros"                   => base_url('UserLogin/sendEmailForgotPassword'),
+            "urlForgotPasswordAction" => $this->session->getFlashdata("erros") ??
+                                         $this->session->getFlashdata("erros")
+        ];
+
         return view('forgot-password', $data);
     }
 
@@ -79,14 +87,14 @@ class UserLogin extends \App\Controllers\BaseController
             }
 
 
-            $user = $this->UserModel->where(['email' => $this->request->getPost('email')])->first();
+            $user = $this->userModel->where(['email' => $this->request->getPost('email')])->first();
             if (empty($user)) {
                 throw new \Exception(lang('Login.messageEmailNotFound'));
             }
 
             $forgot_password = random_string('alnum', 8);
             $user = $user->setForgotPassword($forgot_password);
-            if (!$this->UserModel->update($user->id, $user)) {
+            if (!$this->userModel->update($user->id, $user)) {
                 throw new \Exception(lang('Login.messageChangePasswordErro'));
             }
 
@@ -127,7 +135,7 @@ class UserLogin extends \App\Controllers\BaseController
         if (empty($hash)) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-        $user = $this->UserModel->where('forgot_password', $hash)->first();
+        $user = $this->userModel->where('forgot_password', $hash)->first();
         if (empty($user)) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -154,14 +162,14 @@ class UserLogin extends \App\Controllers\BaseController
                 throw new \Exception("Validation errors", 97);
             }
 
-            $user = $this->UserModel->where('forgot_password', $hash)->first();
+            $user = $this->userModel->where('forgot_password', $hash)->first();
             if (empty($user)) {
                 throw new \Exception(null, 404);
             }
             $user = $user->setPassword($this->request->getPost('password'));
             $user = $user->clearForgotPassword();
 
-            if (!$this->UserModel->update($user->id, $user)) {
+            if (!$this->userModel->update($user->id, $user)) {
                 throw new \Exception(lang('Login.messageChangePasswordErro'));
             }
             $result = redirect()->with('messageInfo', lang("Login.messageChangePasswordSuccess"))->to('/UserLogin');

@@ -7,13 +7,13 @@
 </head>
 <body>
 <a class="btn-home" href="<?= base_url('/admin/home') ?>">
-    <img src="<?= base_url('/icons/home-icon.png') ?>"/>
+    <img src="<?= base_url('/img/home-icon.png') ?>"/>
 </a>
 <h1 class="title-page">
     <?= lang('File.title') ?>
 </h1>
 <a class="btn-logout" href="<?= base_url('/UserLogin/logout') ?>">
-    <img src="<?= base_url('/icons/off.png') ?>"/>
+    <img src="<?= base_url('/img/off.png') ?>"/>
 </a>
 <div class="container">
     <?php if(!empty($message)) : ?>
@@ -23,10 +23,10 @@
     <?php endif;?>
     <form method="get" class="form-search">
         <input name="search" value="<?= empty($_GET['search']) ? '' : $_GET['search'] ?>">
-        <button><img src="<?=base_url('/icons/search.png')?>"/></button>
+        <button><img src="<?=base_url('/img/search.png')?>"/></button>
     </form>
 
-    <a class="btn-create" href="<?= base_url('/admin/file/create') ?>"><img src="<?= base_url('/icons/add.png') ?>"/></a>
+    <a class="btn-create" href="<?= base_url('/admin/file/create') ?>"><img src="<?= base_url('/img/add.png') ?>"/></a>
     <table>
         <thead>
         <tr>
@@ -49,9 +49,9 @@
                     <td><?= $file->customer ?></td>
                     <td><?= $file->user ?></td>
                     <td>
-                        <a class="btn-action" href="<?= base_url("/admin/file/show/{$file->id}") ?>"><img src="<?=base_url('icons/eye.png')?>"/></a>
-                        <a class="btn-action" href="<?= base_url("/admin/file/edit/{$file->id}") ?>"><img src="<?=base_url('icons/edit.png')?>"/></a>
-                        <a class="btn-action" href="<?= base_url("/admin/file/download/{$file->id}") ?>"><img src="<?=base_url('icons/download.png')?>"/></a>
+                        <a class="btn-action" href="<?= base_url("/admin/file/show/{$file->id}") ?>"><img src="<?=base_url('/img/eye.png')?>"/></a>
+                        <a class="btn-action" href="<?= base_url("/admin/file/edit/{$file->id}") ?>"><img src="<?=base_url('/img/edit.png')?>"/></a>
+                        <a class="btn-action" href="<?= base_url("/admin/file/download/{$file->id}") ?>"><img src="<?=base_url('/img/download.png')?>"/></a>
                     </td>
                 </tr>
             <?php

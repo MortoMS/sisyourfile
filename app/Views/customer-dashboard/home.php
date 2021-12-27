@@ -10,7 +10,7 @@
     <?= lang('File.title') ?>
 </h1>
 <a class="btn-logout" href="<?= base_url('/UserLogin/logout') ?>">
-    <img src="<?= base_url('/icons/off.png') ?>"/>
+    <img src="<?= base_url('/img/off.png') ?>"/>
 </a>
 <div class="container">
     <?php if (!empty($message)) : ?>
@@ -20,7 +20,7 @@
     <?php endif; ?>
     <form method="get" class="form-search">
         <input name="search" value="<?= empty($_GET['search']) ? '' : $_GET['search'] ?>">
-        <button><img src="<?= base_url('/icons/search.png') ?>"/></button>
+        <button><img src="<?= base_url('/img/search.png') ?>"/></button>
     </form>
 
     <table>
@@ -53,7 +53,7 @@
                     <td><?= \Util::formatDate(getenv('app.defaultLocale'), $file->updated_at) ?></td>
                     <td>
                         <a class="btn-action" href="<?= base_url("/customer/download/{$file->id}") ?>"><img
-                                    src="<?= base_url('icons/download.png') ?>"/></a>
+                                    src="<?= base_url('/img/download.png') ?>"/></a>
                     </td>
                 </tr>
             <?php

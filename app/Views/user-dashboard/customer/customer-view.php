@@ -10,13 +10,13 @@
 <body>
 
 <a class="btn-home" href="<?= base_url('/admin/home') ?>">
-    <img src="<?= base_url('/icons/home-icon.png') ?>"/>
+    <img src="<?= base_url('/img/home-icon.png') ?>"/>
 </a>
 <h1 class="title-page">
     <?= lang('Customer.title') ?>
 </h1>
 <a class="btn-logout" href="<?= base_url('/UserLogin/logout') ?>">
-    <img src="<?= base_url('/icons/off.png') ?>"/>
+    <img src="<?= base_url('/img/off.png') ?>"/>
 </a>
 <fieldset>
     <legend><?=lang('Customer.title')?></legend>

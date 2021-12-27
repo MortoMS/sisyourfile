@@ -7,10 +7,10 @@
 </head>
 <body>
 <a class="btn-home" href="<?= base_url('/admin/home') ?>">
-    <img src="<?= base_url('/icons/home-icon.png') ?>"/>
+    <img src="<?= base_url('/img/home-icon.png') ?>"/>
 </a>
 <a class="btn-logout" href="<?= base_url('/UserLogin/logout') ?>">
-    <img src="<?= base_url('/icons/off.png') ?>"/>
+    <img src="<?= base_url('/img/off.png') ?>"/>
 </a>
 <fieldset>
     <legend><?= lang('File.textNewFile') ?></legend>
@@ -36,7 +36,7 @@
             ?>
         </select>
         <?= csrf_field() ?>
-        <button class="button-send"><img src="<?=base_url('icons/save.png')?>"/></button>
+        <button class="button-send"><img src="<?=base_url('/img/save.png')?>"/></button>
 
 
         <?php

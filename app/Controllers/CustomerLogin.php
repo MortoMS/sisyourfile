@@ -24,8 +24,10 @@ class CustomerLogin extends \App\Controllers\BaseController
             "title"              => lang('Login.customerTitle'),
             "urlLogin"           => base_url('UserLogin/login'),
             "linkForgotPassword" => base_url('CustomerLogin/forgotPassword'),
-            "message"            => $this->session->getFlashdata("message") ?? $this->session->getFlashdata("message"),
-            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? $this->session->getFlashdata("messageInfo")
+            "message"            => $this->session->getFlashdata("message") ?? 
+                                    $this->session->getFlashdata("message"),
+            "messageInfo"        => $this->session->getFlashdata("messageInfo") ?? 
+                                    $this->session->getFlashdata("messageInfo")
         ];
 
         return Util::renderView("login", $data["title"], $data);
