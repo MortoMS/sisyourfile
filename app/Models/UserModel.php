@@ -1,35 +1,43 @@
 <?php
+
 namespace App\Models;
-class UserModel extends \CodeIgniter\Model
+
+use CodeIgniter\Model;
+
+class UserModel extends Model
 {
+   protected $table         = 'user';
+   protected $primaryKey    = 'id';
+   protected $allowedFields = [
+      'name', 
+      'email',
+      'password',
+      'forgot_password'
+   ];
 
-    protected $table      = 'user';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email','password','forgot_password'];
+   protected $useTimestamps = true;
+   protected $createdField  = 'created_at';
+   protected $updatedField  = 'updated_at';
 
-    protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $returnType    = 'App\Entities\User';
+   /**
+    * Valida o email e a senha do usuário
+    *
+    * @param string $email Email referente ao usuario
+    * @param string $password Senha referente ao email do usuário
+    *
+    * @return false|UserModel
+    */
+   public function validationLoginUser($email, $password)
+   {
+      $user = $this->where([
+         "email" => $email
+      ])->first();
 
-    public function getForPaginate($search='',$page = 1, $perpage = 10){
-        $offset = ($page - 1) * $perpage;
-        $sql = "
-           SELECT 
-           SQL_CALC_FOUND_ROWS
-           *
-           FROM
-              {$this->table}
-           WHERE
-              name like '%{$search}%'
-            OR email like '%{$search}%'
-            ORDER BY {$this->table}.id DESC
-            LIMIT {$perpage} 
-            OFFSET {$offset}
-         ";
-        $rs = $this->db->query($sql);
-        $data['data'] = $rs->getResult();
-        $data["total"] = $this->db->query("SELECT FOUND_ROWS() as total")->getFirstRow()->total;
-        return $data;
-    }
+      if ($user and password_verify($password, $user['password']))
+      {
+         return $user;  
+      }
+
+      return false;
+   }
 }

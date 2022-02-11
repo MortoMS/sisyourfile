@@ -7,6 +7,7 @@ return [
     'defaultForgotPassword' => 'Forgot Password?',
     'userTitle' => 'User Login',
     'customerTitle' => 'Customer Login',
+    'messageUserNotFound' => 'Usuário ou/e senha invalidos(s)!',
     'messageEmailNotFound' => 'E-mail not found',
     'messagePasswordErro' => 'Password does not match!',
     'messageChangePasswordErro' => 'An error occurred try again!',

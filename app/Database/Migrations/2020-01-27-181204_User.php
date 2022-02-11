@@ -13,6 +13,13 @@ class User extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
+            'role' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => TRUE,
+                'auto_increment' => FALSE,
+                'default' => 0
+            ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 240,

@@ -58,7 +58,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * only routes that have been defined here will be available.
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Login');
+$routes->setDefaultController('HomeController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -66,47 +66,50 @@ $routes->setAutoRoute(true);
 
 /**
  * --------------------------------------------------------------------
- * Route Definitions
+ * Route Publics
  * --------------------------------------------------------------------
  */
+$routes->get('/', 'HomeController::index');
+$routes->get('/csrf', 'LoginControlller::csrf');
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-$routes->get('/', 'Login::index');
+$routes->post('/login', 'LoginControlller::login');
+
+$routes->post('/logout', 'LoginControlller::logout');
+$routes->get('/logout', 'LoginControlller::logout');
 
 
-/**
- * ADMIN
- */
-$routes->get('/admin/home/', '\App\Controllers\Admin\Home::index');
+// /**
+//  * ADMIN
+//  */
+// $routes->get('/admin/home/', '\App\Controllers\Admin\Home::index');
 
-$routes->get('/admin/user/', '\App\Controllers\Admin\User::index');
-$routes->get('/admin/user/show/(:num)', '\App\Controllers\Admin\User::show/$1');
-$routes->get('/admin/user/edit/(:num)', '\App\Controllers\Admin\User::edit/$1');
-$routes->get('/admin/user/create', '\App\Controllers\Admin\User::create');
-$routes->post('/admin/user', '\App\Controllers\Admin\User::store');
-$routes->put('/admin/user', '\App\Controllers\Admin\User::update');
+// $routes->get('/admin/user/', '\App\Controllers\Admin\User::index');
+// $routes->get('/admin/user/show/(:num)', '\App\Controllers\Admin\User::show/$1');
+// $routes->get('/admin/user/edit/(:num)', '\App\Controllers\Admin\User::edit/$1');
+// $routes->get('/admin/user/create', '\App\Controllers\Admin\User::create');
+// $routes->post('/admin/user', '\App\Controllers\Admin\User::store');
+// $routes->put('/admin/user', '\App\Controllers\Admin\User::update');
 
-$routes->get('/admin/customer/', '\App\Controllers\Admin\Customer::index');
-$routes->get('/admin/customer/show/(:num)', '\App\Controllers\Admin\Customer::show/$1');
-$routes->get('/admin/customer/edit/(:num)', '\App\Controllers\Admin\Customer::edit/$1');
-$routes->get('/admin/customer/create', '\App\Controllers\Admin\Customer::create');
-$routes->post('/admin/customer', '\App\Controllers\Admin\Customer::store');
-$routes->put('/admin/customer', '\App\Controllers\Admin\Customer::update');
+// $routes->get('/admin/customer/', '\App\Controllers\Admin\Customer::index');
+// $routes->get('/admin/customer/show/(:num)', '\App\Controllers\Admin\Customer::show/$1');
+// $routes->get('/admin/customer/edit/(:num)', '\App\Controllers\Admin\Customer::edit/$1');
+// $routes->get('/admin/customer/create', '\App\Controllers\Admin\Customer::create');
+// $routes->post('/admin/customer', '\App\Controllers\Admin\Customer::store');
+// $routes->put('/admin/customer', '\App\Controllers\Admin\Customer::update');
 
-$routes->get('/admin/file/', '\App\Controllers\Admin\File::index');
-$routes->get('/admin/file/show/(:num)', '\App\Controllers\Admin\File::show/$1');
-$routes->get('/admin/file/edit/(:num)', '\App\Controllers\Admin\File::edit/$1');
-$routes->get('/admin/file/create', '\App\Controllers\Admin\File::create');
-$routes->get('/admin/file/download', '\App\Controllers\Admin\File::download');
-$routes->post('/admin/file', '\App\Controllers\Admin\File::store');
-$routes->post('/admin/file/update', '\App\Controllers\Admin\File::update');
+// $routes->get('/admin/file/', '\App\Controllers\Admin\File::index');
+// $routes->get('/admin/file/show/(:num)', '\App\Controllers\Admin\File::show/$1');
+// $routes->get('/admin/file/edit/(:num)', '\App\Controllers\Admin\File::edit/$1');
+// $routes->get('/admin/file/create', '\App\Controllers\Admin\File::create');
+// $routes->get('/admin/file/download', '\App\Controllers\Admin\File::download');
+// $routes->post('/admin/file', '\App\Controllers\Admin\File::store');
+// $routes->post('/admin/file/update', '\App\Controllers\Admin\File::update');
 
-/**
- * CUSTOMER
- */
-$routes->get('/customer/home/', '\App\Controllers\Customer\Home::index');
-$routes->get('/customer/download/(:num)', '\App\Controllers\Customer\Home::download/$1');
+// /**
+//  * CUSTOMER
+//  */
+// $routes->get('/customer/home/', '\App\Controllers\Customer\Home::index');
+// $routes->get('/customer/download/(:num)', '\App\Controllers\Customer\Home::download/$1');
 
 
 /**
